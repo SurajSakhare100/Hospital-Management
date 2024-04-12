@@ -100,14 +100,14 @@ def get_doctors():
 @app.route('/api/hospital/doctors', methods=['POST'])
 def add_doctor():
     data = request.json
-    doctor_id = data['id']
     first_name = data['first_name']
     last_name = data['last_name']
     specialization = data['specialization']
+    contact_number=data['contact_number']
     connection = get_db_connection()
     cursor = connection.cursor()
-    cursor.execute("INSERT INTO doctors (doctor_id, first_name, last_name, specialization) VALUES (%s, %s, %s, %s)", 
-                   (doctor_id, first_name, last_name, specialization))
+    cursor.execute("INSERT INTO doctors ( first_name, last_name, specialization,contact_number) VALUES (%s, %s, %s, %s)", 
+                   (first_name, last_name, specialization,contact_number))
     connection.commit()
     cursor.close()
     connection.close()
@@ -205,7 +205,18 @@ def get_appointment_count():
     except Exception as e:
         return jsonify({'error': str(e)})
 
-
+@app.route('/api/hospital/medicalrecord/count', methods=['GET'])
+def get_medical_count():
+    try:
+        connection = get_db_connection()
+        cursor = connection.cursor()
+        cursor.execute("SELECT COUNT(*) FROM medical_records")
+        count = cursor.fetchone()[0]
+        cursor.close()
+        connection.close()
+        return jsonify({'count': count})
+    except Exception as e:
+        return jsonify({'error': str(e)})
 
 if __name__ == '__main__':
     app.run(debug=True)

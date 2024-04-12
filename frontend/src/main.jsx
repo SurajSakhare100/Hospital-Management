@@ -24,7 +24,7 @@ const router = createBrowserRouter([
         element: <Patients/>,
       },
       {
-        path: '/dashboard/docters',
+        path: '/dashboard/doctors',
         element: <Doctors/>,
       },
       {

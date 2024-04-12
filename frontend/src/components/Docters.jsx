@@ -6,7 +6,6 @@ function Doctors() {
   const [newDoctor, setNewDoctor] = useState({ doctor_id: '', first_name: '', last_name: '', specialization: '', contact_number: '' });
   const [editingDoctor, setEditingDoctor] = useState(null);
   const [updatedDoctor, setUpdatedDoctor] = useState({ doctor_id: '', first_name: '', last_name: '', specialization: '', contact_number: '' });
-
   useEffect(() => {
     fetchDoctors();
   }, []);
@@ -57,7 +56,7 @@ function Doctors() {
   };
 
   return (
-    <div className='w-full'>
+    <div className='w-full pl-72 bg-[#F8F9FA]'>
       <h1 className='text-black text-3xl'>Doctors</h1>
       <ul className='flex gap-4 flex-wrap'>
         {doctors.map((doctor) => (
@@ -98,7 +97,7 @@ function Doctors() {
           <input className='border' type="text" value={newDoctor.specialization} onChange={e => setNewDoctor({ ...newDoctor, specialization: e.target.value })} placeholder="Specialization" />
           <input className='border' type="text" value={newDoctor.contact_number} onChange={e => setNewDoctor({ ...newDoctor, contact_number: e.target.value })} placeholder="Contact Number" />
         </div>
-        <button className='bg-red-500 rounded-lg px-4 py-1 mx-2 text-white font-semibold shadow-md' onClick={addDoctor}>Add Doctor</button>
+        <button className='bg-red-500 rounded-lg px-4 py-1 mx-2 text-white font-semibold shadow-md' onClick={()=>addDoctor()}>Add Doctor</button>
       </div>
     </div>
   );

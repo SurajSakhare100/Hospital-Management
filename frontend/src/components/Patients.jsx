@@ -56,7 +56,7 @@ function Patients() {
   };
 
   return (
-    <div className='w-full'>
+    <div className='w-full pl-72 bg-[#F8F9FA]'>
       <h1 className='text-black text-3xl'>Patients</h1>
       <ul className='flex gap-4 flex-wrap'>
         {patients.map((patient) => (
