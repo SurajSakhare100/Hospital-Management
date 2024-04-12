@@ -56,11 +56,25 @@ function Patients() {
   };
 
   return (
-    <div className='w-full pl-72 bg-[#F8F9FA]'>
-      <h1 className='text-black text-3xl'>Patients</h1>
+    <div className='w-full pl-72 pt-2 pr-4 bg-[#F8F9FA]'>
+      <div className='w-full py-6 bg-white rounded-lg mb-4 shadow-lg'>
+        <h2 className='text-black text-2xl text-center mb-3 font-semibold'>Add New Patients</h2>
+        <div className='w-full flex justify-center'>
+          <div className='flex flex-col gap-2 w-1/2 text-black items-center justify-center'>
+            <input className='w-full border px-2 py-1 rounded-md shadow-sm' type="text" value={newPatient.first_name} onChange={e => setNewPatient({ ...newPatient, first_name: e.target.value })} placeholder='first name'/>
+            <input className='w-full border px-2 py-1 rounded-md shadow-sm' type="text" value={newPatient.last_name} onChange={e => setNewPatient({ ...newPatient, last_name: e.target.value })} placeholder='last name' />
+            <input className='w-full border px-2 py-1 rounded-md shadow-sm' type="date" value={newPatient.date_of_birth} onChange={e => setNewPatient({ ...newPatient, date_of_birth: e.target.value })}  />
+            <input className='w-full border px-2 py-1 rounded-md shadow-sm' type="text" value={newPatient.gender} onChange={e => setNewPatient({ ...newPatient, gender: e.target.value })} placeholder='gender'/>
+            <input className='w-full border px-2 py-1 rounded-md shadow-sm' type="text" value={newPatient.contact_number} onChange={e => setNewPatient({ ...newPatient, contact_number: e.target.value })} placeholder='Contact Number'/>
+            <input className='w-full border px-2 py-1 rounded-md shadow-sm' type="text" value={newPatient.address} onChange={e => setNewPatient({ ...newPatient, address: e.target.value })} placeholder='address' />
+            <button className='bg-red-500 rounded-lg px-4 py-1  text-white font-semibold shadow-lg w-full' onClick={addPatient}>Add Patient</button>
+          </div>
+        </div>
+      </div>
+      <h1 className='text-black text-3xl text-center mb-4 font-semibold'>Patients</h1>
       <ul className='flex gap-4 flex-wrap'>
         {patients.map((patient) => (
-          <li key={patient.patient_id} className='text-black px-6 py-12 border rounded-xl w-[400px]'>
+          <li key={patient.patient_id} className='text-black px-6 py-8 border rounded-xl w-[400px] list-none bg-white shadow-lg'>
             {editingPatient === patient.patient_id ? (
               <div className='flex flex-col gap-2 w-full'>
                 <input className='border' type="text" value={updatedPatient.first_name} onChange={e => setUpdatedPatient({ ...updatedPatient, first_name: e.target.value })} />
@@ -69,9 +83,9 @@ function Patients() {
                 <input className='border' type="text" value={updatedPatient.gender} onChange={e => setUpdatedPatient({ ...updatedPatient, gender: e.target.value })} />
                 <input className='border' type="text" value={updatedPatient.contact_number} onChange={e => setUpdatedPatient({ ...updatedPatient, contact_number: e.target.value })} />
                 <input className='border' type="text" value={updatedPatient.address} onChange={e => setUpdatedPatient({ ...updatedPatient, address: e.target.value })} />
-                <div className='flex'>
-                  <button className='bg-green-500 rounded-lg px-4 py-1 mx-2 text-white font-semibold shadow-md' onClick={() => updatePatient(patient.patient_id)}>Save</button>
-                  <button className='bg-red-500 rounded-lg px-4 py-1 mx-2 text-white font-semibold shadow-md' onClick={() => setEditingPatient(null)}>Cancel</button>
+                <div className='flex gap-2'>
+                  <button className='bg-green-500 rounded-lg px-4 py-1  text-white font-semibold shadow-md' onClick={() => updatePatient(patient.patient_id)}>Save</button>
+                  <button className='bg-red-500 rounded-lg px-4 py-1  text-white font-semibold shadow-md' onClick={() => setEditingPatient(null)}>Cancel</button>
                 </div>
               </div>
             ) : (
@@ -83,9 +97,9 @@ function Patients() {
                 <p><span className='font-bold text-md'>Gender: </span>{patient.gender}</p>
                 <p><span className='font-bold text-md'>Contact Number: </span>{patient.contact_number}</p>
                 <p><span className='font-bold text-md'>Address: </span>{patient.address}</p>
-                <div className='flex justify-around'>
-                  <button className='bg-red-500 w-1/2 rounded-lg px-4 py-1 mx-2 text-white font-semibold shadow-md' onClick={() => deletePatient(patient.patient_id)}>Delete</button>
-                  <button className='bg-green-500 w-1/2 rounded-lg px-4 py-1 mx-2 text-white font-semibold shadow-md' onClick={() => handleEdit(patient)}>Edit</button>
+                <div className='flex justify-around gap-2'>
+                  <button className='bg-red-500 w-1/2 rounded-lg px-4 py-1  text-white font-semibold shadow-md' onClick={() => deletePatient(patient.patient_id)}>Delete</button>
+                  <button className='bg-green-500 w-1/2 rounded-lg px-4 py-1  text-white font-semibold shadow-md' onClick={() => handleEdit(patient)}>Edit</button>
                 </div>
               </div>
             )}
@@ -93,19 +107,7 @@ function Patients() {
         ))}
       </ul>
 
-      <div>
-        <h2 className='text-black text-3xl'>Add New Patient</h2>
-        <div className='flex flex-col gap-2 w-1/2 text-black'>
-          <input className='border' type="number" value={newPatient.patient_id} onChange={e => setNewPatient({ ...newPatient, patient_id: e.target.value })} />
-          <input className='border' type="text" value={newPatient.first_name} onChange={e => setNewPatient({ ...newPatient, first_name: e.target.value })} />
-          <input className='border' type="text" value={newPatient.last_name} onChange={e => setNewPatient({ ...newPatient, last_name: e.target.value })} />
-          <input className='border' type="date" value={newPatient.date_of_birth} onChange={e => setNewPatient({ ...newPatient, date_of_birth: e.target.value })} />
-          <input className='border' type="text" value={newPatient.gender} onChange={e => setNewPatient({ ...newPatient, gender: e.target.value })} />
-          <input className='border' type="text" value={newPatient.contact_number} onChange={e => setNewPatient({ ...newPatient, contact_number: e.target.value })} />
-          <input className='border' type="text" value={newPatient.address} onChange={e => setNewPatient({ ...newPatient, address: e.target.value })} />
-        </div>
-        <button className='bg-red-500 rounded-lg px-4 py-1 mx-2 text-white font-semibold shadow-md' onClick={addPatient}>Add Patient</button>
-      </div>
+
     </div>
   );
 }

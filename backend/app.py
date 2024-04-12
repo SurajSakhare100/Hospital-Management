@@ -119,10 +119,11 @@ def update_doctor(id):
     first_name = data['first_name']
     last_name = data['last_name']
     specialization = data['specialization']
+    contact_number=data['contact_number']
     connection = get_db_connection()
     cursor = connection.cursor()
-    update_query = "UPDATE doctors SET first_name = %s, last_name = %s, specialization = %s WHERE doctor_id = %s"
-    cursor.execute(update_query, (first_name, last_name, specialization, id))
+    update_query = "UPDATE doctors SET first_name = %s, last_name = %s, specialization = %s ,contact_number=%s WHERE doctor_id = %s"
+    cursor.execute(update_query, (first_name, last_name, specialization, contact_number,id))
     connection.commit()
     cursor.close()
     connection.close()
@@ -148,12 +149,36 @@ def get_appointments():
     cursor.close()
     connection.close()
     
-    # Return appointments as JSON response
     return jsonify(appointments)
 
+@app.route('/api/hospital/appointments/<int:id>', methods=['PUT'])
+def update_appointment(id):
+    data = request.json
+    appointment_date = data['appointment_date']
+    doctor_id = data['doctor_id']
+    patient_id = data['patient_id']
+    status=data['status']
+    connection = get_db_connection()
+    cursor = connection.cursor()
+    update_query = "UPDATE appointments SET appointment_date = %s, doctor_id = %s, patient_id = %s ,status=%s WHERE appointment_id = %s"
+    cursor.execute(update_query, (appointment_date, doctor_id, patient_id, status,id))
+    connection.commit()
+    cursor.close()
+    connection.close()
+    return 'appointment updated successfully'
+
+@app.route('/api/hospital/appointments/<int:id>', methods=['DELETE'])
+def delete_appointment(id):
+    connection = get_db_connection()
+    cursor = connection.cursor()
+    cursor.execute("DELETE FROM appointments WHERE appointment_id = %s", (id,))
+    connection.commit()
+    cursor.close()
+    connection.close()
+    return 'appointment deleted successfully'
 
 
-@app.route('/api/hospital/medical_records', methods=['GET'])
+@app.route('/api/hospital/medicalrecords', methods=['GET'])
 def get_medical_records():
     connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
@@ -162,9 +187,58 @@ def get_medical_records():
     cursor.close()
     connection.close()
     
-    # Return appointments as JSON response
     return jsonify(medical_records)
 
+@app.route('/api/hospital/medicalrecords', methods=['POST'])
+def add_medicalrecords():
+    data = request.json
+    date = data['date']
+    doctor_id = data['doctor_id']
+    patient_id = data['patient_id']
+    medical_problem=data['medical_problem']
+    medication_prescribed=data['medication_prescribed']
+    diagnosis=data['diagnosis']
+    connection = get_db_connection()
+    cursor = connection.cursor()
+    cursor.execute("INSERT INTO medical_records ( date, doctor_id, patient_id, medical_problem,medication_prescribed,diagnosis) VALUES (%s, %s, %s,%s,%s,%s)", 
+                   (date, doctor_id, patient_id, medical_problem,medication_prescribed,diagnosis))
+    connection.commit()
+    cursor.close()
+    connection.close()
+    return 'medicalrecords added successfully', 201
+
+@app.route('/api/hospital/medicalrecords/<int:id>', methods=['PUT'])
+def update_medical(id):
+    data = request.json
+    date = data['date']
+    doctor_id = data['doctor_id']
+    patient_id = data['patient_id']
+    medical_problem=data['medical_problem']
+    medication_prescribed=data['medication_prescribed']
+    diagnosis=data['diagnosis']
+    connection = get_db_connection()
+    cursor = connection.cursor()
+    update_query = "UPDATE medical_records SET date = %s, doctor_id = %s, patient_id = %s ,medical_problem=%s, medication_prescribed=%s ,diagnosis=%s WHERE record_id = %s"
+    cursor.execute(update_query, (date, doctor_id, patient_id, medical_problem,medication_prescribed,diagnosis,id))
+    connection.commit()
+    cursor.close()
+    connection.close()
+    return 'medicalrecords updated successfully'
+
+@app.route('/api/hospital/medicalrecords/<int:id>', methods=['DELETE'])
+def delete_medical(id):
+    connection = get_db_connection()
+    cursor = connection.cursor()
+    cursor.execute("DELETE FROM medical_records WHERE record_id = %s", (id,))
+    connection.commit()
+    cursor.close()
+    connection.close()
+    return 'medical record deleted successfully'
+
+
+
+
+# 
 @app.route('/api/hospital/patient/count', methods=['GET'])
 def get_patient_count():
     try:

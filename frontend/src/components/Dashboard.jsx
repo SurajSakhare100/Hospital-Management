@@ -8,86 +8,87 @@ import { MdOutlinePayments } from "react-icons/md";
 import { BiHelpCircle } from "react-icons/bi";
 import { FiSettings } from "react-icons/fi";
 import { MdLogout } from "react-icons/md";
+import {Link} from 'react-router-dom'
 export default function Dashboard() {
 
 
     return (
         <>
-            <aside className="fixed top-0 left-0 z-40 w-60 h-screen transition-transform -translate-x-full sm:translate-x-0 shadow-xl rounded-r-md" aria-label="Sidebar">
+            <aside className="fixed top-0 left-0 z-40 w-60 h-screen transition-transform -translate-x-full sm:translate-x-0 shadow-xl rounded-r-xl" aria-label="Sidebar">
                 <div className="h-full px-3 py-4 overflow-y-auto bg-white">
-                    <ul className="space-y-2 font-medium">
+                    <ul className="space-y-2 font-medium ">
                         <li>
-                            <a href="#" className="flex items-center p-2 text-gray-400 font-[550] rounded-lg  hover:text-[#6AB7A4] hover:bg-[#cff7eda8] group">
+                            <Link to={''} className="flex items-center p-2 text-gray-400 font-[550] rounded-lg  hover:text-[#6AB7A4] hover:bg-[#cff7eda8] group">
                                <AiOutlineHome className="flex-shrink-0 w-5 h-5 text-[#6AB7A4] transition duration-75  group-hover:text-[#6AB7A4]"/>
                                 <span className="ms-3">Dashboard</span>
-                            </a>
+                            </Link>
                         </li>
 
                         <li>
-                            <a href="#" className="flex items-center p-2 text-gray-400  font-[550] rounded-lg  hover:text-[#6AB7A4] hover:bg-[#cff7eda8]  group">
+                            <Link to={'/dashboard/patients'} className="flex items-center p-2 text-gray-400  font-[550] rounded-lg  hover:text-[#6AB7A4] hover:bg-[#cff7eda8]  group">
                                 <HiMiniUsers className="flex-shrink-0 w-5 h-5 text-[#6AB7A4] transition duration-75  group-hover:text-[#6AB7A4]"/>
                                 <span className="flex-1 ms-3 whitespace-nowrap">Patient</span>
-                            </a>
+                            </Link>
                         </li>
 
                         <li>
-                            <a href="#" className="flex items-center p-2 text-gray-400 font-[550] rounded-lg  hover:text-[#6AB7A4] hover:bg-[#cff7eda8]  group">
+                            <Link to={'/dashboard/medicalrecords'} className="flex items-center p-2 text-gray-400 font-[550] rounded-lg  hover:text-[#6AB7A4] hover:bg-[#cff7eda8]  group">
                            
                             <HiOutlineUsers className="flex-shrink-0 w-5 h-5 text-[#6AB7A4] transition duration-75  group-hover:text-[#6AB7A4]"/>
 
-                                <span className="flex-1 ms-3 whitespace-nowrap">Receptions</span>
-                            </a>
+                                <span className="flex-1 ms-3 whitespace-nowrap">Medical Records</span>
+                            </Link>
                         </li>
                        
                         <li>
-                            <a href="#" className="flex items-center p-2 text-gray-400 font-[550] rounded-lg  hover:text-[#6AB7A4] hover:bg-[#cff7eda8]  group">     
+                            <Link to={'/dashboard/doctors'} className="flex items-center p-2 text-gray-400 font-[550] rounded-lg  hover:text-[#6AB7A4] hover:bg-[#cff7eda8]  group">     
                             <RiUserHeartFill className="flex-shrink-0 w-5 h-5 text-[#6AB7A4] transition duration-75  group-hover:text-[#6AB7A4]"/>
                                 <span className="flex-1 ms-3 whitespace-nowrap">Docter</span>
-                            </a>
+                            </Link>
                         </li>
                         
                         <li>
-                            <a href="#" className="flex items-center p-2 text-gray-400 font-[550] rounded-lg  hover:text-[#6AB7A4] hover:bg-[#cff7eda8]  group">
+                            <Link to={'/dashboard/appointments'} className="flex items-center p-2 text-gray-400 font-[550] rounded-lg  hover:text-[#6AB7A4] hover:bg-[#cff7eda8]  group">
                             <SlCalender className="flex-shrink-0 w-5 h-5 font-semibold text-[#6AB7A4] transition duration-75  group-hover:text-[#6AB7A4]"/>
                                 <span className="flex-1 ms-3 whitespace-nowrap">Appointments</span>
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a href="#" className="flex items-center p-2 text-gray-400 font-[550] rounded-lg  hover:text-[#6AB7A4] hover:bg-[#cff7eda8]  group">
+                            <Link to={''} className="flex items-center p-2 text-gray-400 font-[550] rounded-lg  hover:text-[#6AB7A4] hover:bg-[#cff7eda8]  group">
                             <MdLogout className="flex-shrink-0 w-5 h-5 font-semibold text-[#6AB7A4] transition duration-75  group-hover:text-[#6AB7A4]"/>
 
                                 <span className="flex-1 ms-3 whitespace-nowrap">log Out</span>
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                     <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
                         <li>
-                            <a href="#" className="flex items-center p-2 text-gray-400 font-[550] transition duration-75 rounded-lg hover:text-[#6AB7A4] hover:bg-[#cff7eda8]   group">
+                            <Link to={''} className="flex items-center p-2 text-gray-400 font-[550] transition duration-75 rounded-lg hover:text-[#6AB7A4] hover:bg-[#cff7eda8]   group">
                             <RiMedicineBottleLine className="flex-shrink-0 w-5 h-5 font-semibold text-[#6AB7A4] transition duration-75  group-hover:text-[#6AB7A4]"/>
                                 <span className="ms-3">Medicine</span>
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a href="#" className="flex items-center p-2 text-gray-400 font-[550] transition duration-75 rounded-lg hover:text-[#6AB7A4] hover:bg-[#cff7eda8]   group">
+                            <Link to={''} className="flex items-center p-2 text-gray-400 font-[550] transition duration-75 rounded-lg hover:text-[#6AB7A4] hover:bg-[#cff7eda8]   group">
                             
                             <MdOutlinePayments className="flex-shrink-0 w-5 h-5 font-semibold text-[#6AB7A4] transition duration-75  group-hover:text-[#6AB7A4]"/>
 
                                 <span className="ms-3">Payments</span>
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a href="#" className="flex items-center p-2 text-gray-400 font-[550] transition duration-75 rounded-lg hover:text-[#6AB7A4] hover:bg-[#cff7eda8]   group">
+                            <Link to={''} className="flex items-center p-2 text-gray-400 font-[550] transition duration-75 rounded-lg hover:text-[#6AB7A4] hover:bg-[#cff7eda8]   group">
                             <FiSettings className="flex-shrink-0 w-5 h-5 font-semibold text-[#6AB7A4] transition duration-75  group-hover:text-[#6AB7A4]"/>
 
                                 <span className="ms-3">Settings</span>
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a href="#" className="flex items-center p-2 text-gray-400 font-[550] transition duration-75 rounded-lg hover:text-[#6AB7A4] hover:bg-[#cff7eda8]   group">
+                            <Link to={''} className="flex items-center p-2 text-gray-400 font-[550] transition duration-75 rounded-lg hover:text-[#6AB7A4] hover:bg-[#cff7eda8]   group">
                             <BiHelpCircle className="flex-shrink-0 w-5 h-5 font-semibold text-[#6AB7A4] transition duration-75  group-hover:text-[#6AB7A4]"/>
 
                                 <span className="ms-3">Help</span>
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </div>
