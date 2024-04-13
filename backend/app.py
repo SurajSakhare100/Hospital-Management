@@ -151,6 +151,23 @@ def get_appointments():
     
     return jsonify(appointments)
 
+
+@app.route('/api/hospital/appointments', methods=['POST'])
+def add_appointment():
+    data = request.json
+    appointment_date = data['appointment_date']
+    doctor_id = data['doctor_id']
+    patient_id = data['patient_id']
+    status=data['status']
+    connection = get_db_connection()
+    cursor = connection.cursor()
+    cursor.execute("INSERT INTO appointments ( appointment_date, doctor_id, patient_id,status) VALUES (%s, %s, %s, %s)", 
+                   ( appointment_date, doctor_id, patient_id,status))
+    connection.commit()
+    cursor.close()
+    connection.close()
+    return 'appointment added successfully', 201
+
 @app.route('/api/hospital/appointments/<int:id>', methods=['PUT'])
 def update_appointment(id):
     data = request.json
@@ -291,6 +308,56 @@ def get_medical_count():
         return jsonify({'count': count})
     except Exception as e:
         return jsonify({'error': str(e)})
+
+
+
+@app.route('/api/hospital/doctors_with_patients', methods=['GET'])
+def get_doctors_with_patients():
+    try:
+        connection = get_db_connection()
+        cursor = connection.cursor()
+        cursor.execute("""
+            SELECT 
+                doctors.first_name AS doctor_first_name,
+                doctors.last_name AS doctor_last_name,
+                patients.first_name AS patient_first_name,
+                patients.last_name AS patient_last_name,
+                appointments.appointment_date,
+                appointments.status,
+                medical_records.medical_problem
+            FROM 
+                doctors
+            JOIN 
+                appointments ON doctors.doctor_id = appointments.doctor_id
+            JOIN 
+                patients ON appointments.patient_id = patients.patient_id
+            LEFT JOIN 
+                medical_records ON appointments.patient_id = medical_records.patient_id
+            ORDER BY 
+                doctors.last_name, doctors.first_name
+        """)
+        data = cursor.fetchall()
+        cursor.close()
+        
+        # Convert data to a list of dictionaries
+        results = []
+        for row in data:
+            result = {
+                'doctor_first_name': row[0],
+                'doctor_last_name': row[1],
+                'patient_first_name': row[2],
+                'patient_last_name': row[3],
+                'appointment_date': row[4],
+                'status': row[5],
+                'medical_problem': row[6]
+            }
+            results.append(result)
+
+        # Return data as JSON response
+        return jsonify(results)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 
 if __name__ == '__main__':
     app.run(debug=True)

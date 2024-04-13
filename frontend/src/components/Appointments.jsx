@@ -6,7 +6,6 @@ function Appointments() {
   const [newAppointment, setNewAppointment] = useState({ appointment_id: '', appointment_date: '', doctor_id: '', patient_id: '', status: '' });
   const [updatedAppointment, setupdatedAppointment] = useState({ appointment_id: '', appointment_date: '', doctor_id: '', patient_id: '', status: '' });
   const [editingAppointment, setEditingAppointment] = useState(null);
-  console.log(updatedAppointment)
   useEffect(() => {
     fetchAppointments();
   }, []);
@@ -64,7 +63,7 @@ function Appointments() {
             <input className='border px-2 py-1 rounded-md shadow-sm' type="text" value={newAppointment.patient_id} onChange={e => setNewAppointment({ ...newAppointment, patient_id: e.target.value })} placeholder="patient_id" />
             <input className='border px-2 py-1 rounded-md shadow-sm' type="text" value={newAppointment.doctor_id} onChange={e => setNewAppointment({ ...newAppointment, doctor_id: e.target.value })} placeholder="Last Name" />
             <input className='border px-2 py-1 rounded-md shadow-sm' type="text" value={newAppointment.status} onChange={e => setNewAppointment({ ...newAppointment, status: e.target.value })} placeholder="status" />
-            <button className='bg-red-500 rounded-lg px-4 py-1  text-white font-semibold shadow-lg' onClick={() => addDoctor()}>Add Appointment</button>
+            <button className='bg-red-500 rounded-lg px-4 py-1  text-white font-semibold shadow-lg' onClick={() => addAppointment()}>Add Appointment</button>
           </div>
         </div>
       </div>
