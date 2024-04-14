@@ -5,7 +5,8 @@ import json
 from datetime import datetime,timedelta
 app = Flask(__name__)
 CORS(app)
-
+from flask_bcrypt import bcrypt
+import bcrypt
 # Replace these values with your actual database connection details
 db_config = {
     'user': 'root',
@@ -308,8 +309,7 @@ def get_medical_count():
         return jsonify({'count': count})
     except Exception as e:
         return jsonify({'error': str(e)})
-
-
+    
 
 @app.route('/api/hospital/doctors_with_patients', methods=['GET'])
 def get_doctors_with_patients():
@@ -357,6 +357,51 @@ def get_doctors_with_patients():
         return jsonify(results)
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+
+
+
+@app.route('/api/hospital/auth/users', methods=['GET'])
+def users():
+    connection = get_db_connection()
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("select * from users")
+    users=cursor.fetchall()
+    connection.close()
+    return jsonify(users)
+
+@app.route('/api/hospital/signup', methods=['POST'])
+def signup():
+    data = request.json
+    username = data['username']
+    password = data['password']
+    email = data['email']
+    connection = get_db_connection()
+    cursor = connection.cursor()
+    cursor.execute("INSERT INTO users (username, password,email) VALUES (%s, %s, %s)", (username, password,email))
+    connection.commit()
+    
+    return jsonify({'message': 'User registered successfully'}), 201
+
+
+@app.route('/api/hospital/signin', methods=['POST'])
+def signin():
+    data = request.json
+    username = data['username']
+    password = data['password']
+    connection = get_db_connection()
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
+    user = cursor.fetchone()
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    if user and bcrypt.checkpw(password.encode('utf-8'), hashed_password):
+        return jsonify({'message': 'Login successful'}), 200
+    else:
+        return jsonify({'message': 'Invalid username or password'}), 401
+
+@app.route('/')
+def index():
+    return 'helloworld'
 
 
 if __name__ == '__main__':

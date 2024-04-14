@@ -1,17 +1,16 @@
 import React from 'react'
-import Attendance from './components/Attendance'
 import Home from './components/Home'
 import {Outlet} from 'react-router-dom'
 import Dashboard from './components/Dashboard'
-import PatientBox from './components/PatientBox'
 import Navbar from './components/Navbar'
+import UseAuth from './context/UseAuth'
 function App() {
   return (
-    <div className=''>
+    <UseAuth className=''>
       <Dashboard/>
       <Navbar/>
       <Outlet/>
-    </div>
+    </UseAuth>
   )
 }
 

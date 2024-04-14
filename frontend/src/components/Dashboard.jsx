@@ -9,8 +9,17 @@ import { BiHelpCircle } from "react-icons/bi";
 import { FiSettings } from "react-icons/fi";
 import { MdLogout } from "react-icons/md";
 import {Link} from 'react-router-dom'
-export default function Dashboard() {
+import { useapi } from "../context/auth";
+import { useNavigate } from 'react-router-dom';
 
+export default function Dashboard() {
+    const {logout}=useapi();
+    const navigate=useNavigate()
+    
+    const handle=()=>{
+        logout()
+        navigate('/auth/signin')
+    }
 
     return (
         <>
@@ -54,11 +63,10 @@ export default function Dashboard() {
                             </Link>
                         </li>
                         <li>
-                            <Link to={''} className="flex items-center p-2 text-gray-400 font-[550] rounded-lg  hover:text-[#6AB7A4] hover:bg-[#cff7eda8]  group">
-                            <MdLogout className="flex-shrink-0 w-5 h-5 font-semibold text-[#6AB7A4] transition duration-75  group-hover:text-[#6AB7A4]"/>
-
+                           <div onClick={()=>{handle()}} className="flex cursor-pointer items-center p-2 text-gray-400 font-[550] transition duration-75 rounded-lg hover:text-[#6AB7A4] hover:bg-[#cff7eda8]   group">
+                           <MdLogout className="flex-shrink-0 w-5 h-5 font-semibold text-[#6AB7A4] transition duration-75  group-hover:text-[#6AB7A4]"/>
                                 <span className="flex-1 ms-3 whitespace-nowrap">log Out</span>
-                            </Link>
+                           </div>
                         </li>
                     </ul>
                     <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">

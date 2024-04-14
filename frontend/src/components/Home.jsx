@@ -8,6 +8,7 @@ import { RiBarChartGroupedFill, RiMedicineBottleFill, RiUserHeartFill } from "re
 import { SlCalender } from 'react-icons/sl';
 import { RiBarChartGroupedLine } from "react-icons/ri";
 import { IoStatsChartSharp } from "react-icons/io5";
+import { useapi } from '../context/auth';
 function Home() {
   const [patients, setPatients] = useState([]);
   const [docters, setDocter] = useState([]);
@@ -18,7 +19,7 @@ function Home() {
   const [appointmentCount, setAppointmentCount] = useState(0);
   const [medicalCount, setMedicalCount] = useState(0);
   const [doctorPatients, setDoctorPatients] = useState([]);
-
+  const { status } = useapi();
   useEffect(() => {
     fetchPatientCount();
     fetchDocterCount();
@@ -112,9 +113,6 @@ function Home() {
   useEffect(() => {
     fetchdoctors_with_patients();
   }, []);
-
-
-  console.log(doctorPatients)
 
   return (
     <div className='pl-72 py-6 w-full h-full bg-[#F8F9FA]'>
@@ -235,32 +233,7 @@ function Home() {
         </div>
 
       </div>
-      {/* <div className=' border bg-white rounded-lg py-4 px-2 flex flex-col items-center shadow-lg shadow-green-100'>
-        <h1 className='text-3xl text-green-600 text-center pb-4'>Appointment </h1>
-        {doctorPatients.map((doctorPatient, index) => (
-          <li key={index} className='text-black px-4 py-2 border-b w-[500px] list-none'>
 
-            <div className='flex justify-between items-center'>
-              <div className='flex gap-4 w-1/2 items-center'>
-                <div>
-                  <img src="https://lh3.googleusercontent.com/proxy/Rn5I76quPNgFCQpfc6kgSaX3_x5lwX_BU7HHEpvLZPZt7JcuXdSMTYan7RfqFAmuEXOAk-eejxbDp2BiDaPTc6CY54dJYjE" width={35} height={35} className='rounded-full object-contain' alt="" />
-                </div>
-                  <p className='text-md font-semibold text-green-800'>{doctorPatient.doctor_first_name} {doctorPatient.doctor_last_name}</p>
-                  <p className='text-[12px] text-green-400'>{doctorPatient.appointment_date}</p>
-              
-              </div>
-              <div className='w-1/2 flex gap-4 justify-between'>
-                <div className='flex flex-col'>
-                  <p className='text-md font-semibold text-green-800'>{doctorPatient.doctor_first_name} {doctorPatient.doctor_last_name}</p>
-                  <p className='text-[12px] text-green-400'>{doctorPatient.medical_problem}</p>
-                </div>
-                <p className='cursor-pointer font-semibold'>{doctorPatient.status}</p>
-              </div>
-            </div>
-          </li>
-
-        ))}
-      </div> */}
       <div className='mr-10 bg-white rounded-lg border py-8 px-20 flex flex-col items-center shadow-lg shadow-green-100'>
         <h1 className='text-5xl text-green-600 text-center mb-8'>Appointment </h1>
         <table className='w-full h-fit border shadow-xl'>
