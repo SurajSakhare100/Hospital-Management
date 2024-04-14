@@ -19,12 +19,13 @@ function Home() {
   const [appointmentCount, setAppointmentCount] = useState(0);
   const [medicalCount, setMedicalCount] = useState(0);
   const [doctorPatients, setDoctorPatients] = useState([]);
-  const { status } = useapi();
+  const { status,auth } = useapi();
   useEffect(() => {
     fetchPatientCount();
     fetchDocterCount();
     fetchAppointmentCount();
     fetchMedicalCount();
+    auth()
   }, []);
 
   const fetchAppointmentCount = async () => {

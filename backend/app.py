@@ -253,9 +253,6 @@ def delete_medical(id):
     connection.close()
     return 'medical record deleted successfully'
 
-
-
-
 # 
 @app.route('/api/hospital/patient/count', methods=['GET'])
 def get_patient_count():
@@ -358,9 +355,6 @@ def get_doctors_with_patients():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-
-
-
 @app.route('/api/hospital/auth/users', methods=['GET'])
 def users():
     connection = get_db_connection()
@@ -383,21 +377,49 @@ def signup():
     
     return jsonify({'message': 'User registered successfully'}), 201
 
-
 @app.route('/api/hospital/signin', methods=['POST'])
 def signin():
     data = request.json
-    username = data['username']
+    email = data['email']
     password = data['password']
     connection = get_db_connection()
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
+    cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
     user = cursor.fetchone()
+    cursor.close()
+    connection.close()
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
     if user and bcrypt.checkpw(password.encode('utf-8'), hashed_password):
         return jsonify({'message': 'Login successful'}), 200
     else:
         return jsonify({'message': 'Invalid username or password'}), 401
+    
+    
+
+@app.route('/api/hospital/isactive', methods=['POST'])
+def isactivepost():
+    data = request.json
+    email = 'sakhare@gmail.com'  # This should come from request data instead of being hardcoded
+    connection = get_db_connection()
+    cursor = connection.cursor()
+    cursor.execute("SELECT is_active FROM users WHERE email = %s", (email,))
+    auth = cursor.fetchone()
+    cursor.close()
+    connection.close()
+    return jsonify(auth)
+
+@app.route('/api/hospital/isactive', methods=['PUT'])
+def isactive():
+    data = request.json
+    email = data['email'] # This should come from request data instead of being hardcoded
+    connection = get_db_connection()
+    cursor = connection.cursor()
+    cursor.execute("UPDATE users SET is_active=1 WHERE email = '%s'", (email))
+    connection.commit()
+    cursor.close()
+    connection.close()
+    return 'user updated successfully'
+
 
 @app.route('/')
 def index():
