@@ -13,6 +13,7 @@ const SigninForm = () => {
         e.preventDefault();
         try {
             const response = await axios.post('/api/hospital/signin', { email, password });
+            data(email)
             navigate('/')
             // Redirect or show success message
         } catch (error) {

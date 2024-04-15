@@ -6,24 +6,30 @@ import { useNavigate } from 'react-router-dom';
 function UseAuth({ children }) {
     const [status, setStatus] = useState(false);
     const [username, setusername] = useState('');
-    const [email, setemail] = useState('');
+    const [email, setemail] = useState('admin');
     const navigate = useNavigate()
-    console.log(status)
+
+    // const userlogin = async(emaild) => {
+    //     console.log(emaild)
+    //     const response=await axios.post('/api/hospital/welcomepage', { emaild });
+    //     console.log(response)
+    //     setusername(emaild)
+    // }
+
     const data = (emails) => {
         setemail(emails)
+        // userlogin(emails)
     }
     const logout = () => {
         setStatus(false)
     }
     const login = async(email) => {
-        console.log(email)
         await axios.put('/api/hospital/isactive', { email });
         setStatus(true)
     }
 
     const auth = async () => {
         const response = await axios.post('/api/hospital/isactive', { username, email });
-        console.log(response.data[0])
         try {
             if (response.data[0]) {
                 setStatus(true);
@@ -39,7 +45,7 @@ function UseAuth({ children }) {
     }
     
     return (
-        <AuthProvider value={{ status, login, logout, auth, data }}>
+        <AuthProvider value={{ status, login, logout, auth, data,email,username }}>
             {children}
         </AuthProvider>
     )

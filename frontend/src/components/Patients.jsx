@@ -61,12 +61,12 @@ function Patients() {
         <h2 className='text-black text-2xl text-center mb-3 font-semibold'>Add New Patients</h2>
         <div className='w-full flex justify-center'>
           <div className='flex flex-col gap-2 w-1/2 text-black items-center justify-center'>
-            <input className='w-full border px-2 py-1 rounded-md shadow-sm' type="text" value={newPatient.first_name} onChange={e => setNewPatient({ ...newPatient, first_name: e.target.value })} placeholder='first name'/>
-            <input className='w-full border px-2 py-1 rounded-md shadow-sm' type="text" value={newPatient.last_name} onChange={e => setNewPatient({ ...newPatient, last_name: e.target.value })} placeholder='last name' />
+            <input className='w-full border px-2 py-1 rounded-md shadow-sm' type="text" value={newPatient.first_name} onChange={e => setNewPatient({ ...newPatient, first_name: e.target.value })} placeholder='First Name'/>
+            <input className='w-full border px-2 py-1 rounded-md shadow-sm' type="text" value={newPatient.last_name} onChange={e => setNewPatient({ ...newPatient, last_name: e.target.value })} placeholder='Last Name' />
             <input className='w-full border px-2 py-1 rounded-md shadow-sm' type="date" value={newPatient.date_of_birth} onChange={e => setNewPatient({ ...newPatient, date_of_birth: e.target.value })}  />
-            <input className='w-full border px-2 py-1 rounded-md shadow-sm' type="text" value={newPatient.gender} onChange={e => setNewPatient({ ...newPatient, gender: e.target.value })} placeholder='gender'/>
+            <input className='w-full border px-2 py-1 rounded-md shadow-sm' type="text" value={newPatient.gender} onChange={e => setNewPatient({ ...newPatient, gender: e.target.value })} placeholder='Gender'/>
             <input className='w-full border px-2 py-1 rounded-md shadow-sm' type="text" value={newPatient.contact_number} onChange={e => setNewPatient({ ...newPatient, contact_number: e.target.value })} placeholder='Contact Number'/>
-            <input className='w-full border px-2 py-1 rounded-md shadow-sm' type="text" value={newPatient.address} onChange={e => setNewPatient({ ...newPatient, address: e.target.value })} placeholder='address' />
+            <input className='w-full border px-2 py-1 rounded-md shadow-sm' type="text" value={newPatient.address} onChange={e => setNewPatient({ ...newPatient, address: e.target.value })} placeholder='Address' />
             <button className='bg-red-500 rounded-lg px-4 py-1  text-white font-semibold shadow-lg w-full' onClick={addPatient}>Add Patient</button>
           </div>
         </div>

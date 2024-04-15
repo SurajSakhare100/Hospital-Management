@@ -59,10 +59,10 @@ function Appointments() {
         <h2 className='text-black text-2xl text-center mb-3 font-semibold'>Add New Appointment</h2>
         <div className='w-full flex justify-center'>
           <div className='flex flex-col gap-2 w-1/2 text-black mb-4'>
-            <input className='border px-2 py-1 rounded-md shadow-sm' type="date" value={newAppointment.appointment_date} onChange={e => setNewAppointment({ ...newAppointment, appointment_date: e.target.value })} placeholder="Appoin" />
-            <input className='border px-2 py-1 rounded-md shadow-sm' type="text" value={newAppointment.patient_id} onChange={e => setNewAppointment({ ...newAppointment, patient_id: e.target.value })} placeholder="patient_id" />
-            <input className='border px-2 py-1 rounded-md shadow-sm' type="text" value={newAppointment.doctor_id} onChange={e => setNewAppointment({ ...newAppointment, doctor_id: e.target.value })} placeholder="Last Name" />
-            <input className='border px-2 py-1 rounded-md shadow-sm' type="text" value={newAppointment.status} onChange={e => setNewAppointment({ ...newAppointment, status: e.target.value })} placeholder="status" />
+            <input className='border px-2 py-1 rounded-md shadow-sm' type="date" value={newAppointment.appointment_date} onChange={e => setNewAppointment({ ...newAppointment, appointment_date: e.target.value })} placeholder="Appointment" />
+            <input className='border px-2 py-1 rounded-md shadow-sm' type="text" value={newAppointment.patient_id} onChange={e => setNewAppointment({ ...newAppointment, patient_id: e.target.value })} placeholder="Patient ID" />
+            <input className='border px-2 py-1 rounded-md shadow-sm' type="text" value={newAppointment.doctor_id} onChange={e => setNewAppointment({ ...newAppointment, doctor_id: e.target.value })} placeholder="Doctor ID" />
+            <input className='border px-2 py-1 rounded-md shadow-sm' type="text" value={newAppointment.status} onChange={e => setNewAppointment({ ...newAppointment, status: e.target.value })} placeholder="Status" />
             <button className='bg-red-500 rounded-lg px-4 py-1  text-white font-semibold shadow-lg' onClick={() => addAppointment()}>Add Appointment</button>
           </div>
         </div>

@@ -48,7 +48,7 @@ def add_patient():
         connection.commit()
         cursor.close()
         connection.close()
-        return 'Patient added successfully', 201
+        return 'Patient Added Successfully!', 201
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
@@ -82,7 +82,7 @@ def delete_patient(id):
         connection.commit()
         cursor.close()
         connection.close()
-        return 'Patient deleted successfully'
+        return 'Patient Deleted Successfully!'
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
@@ -138,7 +138,7 @@ def delete_doctor(id):
     connection.commit()
     cursor.close()
     connection.close()
-    return 'Doctor deleted successfully'
+    return 'Doctor Deleted Successfully!'
 
 
 @app.route('/api/hospital/appointments', methods=['GET'])
@@ -394,7 +394,6 @@ def signin():
     else:
         return jsonify({'message': 'Invalid username or password'}), 401
     
-    
 
 @app.route('/api/hospital/isactive', methods=['POST'])
 def isactivepost():
@@ -408,17 +407,22 @@ def isactivepost():
     connection.close()
     return jsonify(auth)
 
-@app.route('/api/hospital/isactive', methods=['PUT'])
-def isactive():
+
+
+
+@app.route('/api/hospital/welcomepage', methods=['POST'])
+def userlogin():
     data = request.json
-    email = data['email'] # This should come from request data instead of being hardcoded
+    email = data['emaild'] # This should come from request data instead of being hardcoded
     connection = get_db_connection()
     cursor = connection.cursor()
-    cursor.execute("UPDATE users SET is_active=1 WHERE email = '%s'", (email))
+    cursor.execute("SELECT username FROM users WHERE email = %s", (email,))
     connection.commit()
     cursor.close()
     connection.close()
-    return 'user updated successfully'
+    return 'user login successfully'
+
+
 
 
 @app.route('/')

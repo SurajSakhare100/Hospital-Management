@@ -11,6 +11,7 @@ import Appointments from './components/Appointments.jsx'
 import Dashboard from './components/Dashboard.jsx'
 import SigninForm from './components/SigninForm.jsx'
 import SignupForm from './components/SignupForm.jsx'
+import Search from './components/Search.jsx'
 const router = createBrowserRouter([
   {
     path: '',
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path:'/auth/signup',
         element:<SignupForm/>,
+      },
+      {
+        path:'/patient',
+        element:<Search/>,
       }
     ]
   }

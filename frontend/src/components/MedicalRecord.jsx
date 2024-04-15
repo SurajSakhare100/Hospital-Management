@@ -68,7 +68,7 @@ function MedicalRecord() {
           </div>
         </div>
       </div>
-      <h1 className='text-black text-4xl text-center mb-4 font-semibold'>MedicalRecords</h1>
+      <h1 className='text-black text-4xl text-center mb-4 font-semibold'>Medical Records</h1>
       <div className='flex flex-wrap gap-4 pb-20 justify-center'>
         {medicalRecords.map((medicalRecord) => (
           <li key={medicalRecord.record_id} className='text-black px-6 py-8 border rounded-xl w-[400px] list-none bg-white shadow-lg'>
